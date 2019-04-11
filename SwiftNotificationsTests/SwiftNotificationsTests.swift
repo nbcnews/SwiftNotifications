@@ -6,7 +6,6 @@
 import XCTest
 import SwiftNotifications
 
-
 protocol PostableNotification {
     func post()
 }
@@ -112,14 +111,13 @@ extension CodableTestNotification: Equatable {
     }
 }
 
-
 class MObserver<T: NotificationProtocol> {
-    typealias callbackType = () -> ()
+    typealias CallbackType = () -> Void
     private let observer = NotificationObserver<T>()
-    private let callback: callbackType?
+    private let callback: CallbackType?
     var observed = false
 
-    init(_ callback: callbackType? = nil) {
+    init(_ callback: CallbackType? = nil) {
         self.callback = callback
 
         observer.observe(self, MObserver.observerMethod)
@@ -136,12 +134,12 @@ class MObserver<T: NotificationProtocol> {
 
 // Leaky observer
 class CObserver<T: NotificationProtocol> {
-    typealias callbackType = () -> ()
+    typealias CallbackType = () -> Void
     private let observer = NotificationObserver<T>()
-    private let callback: callbackType?
+    private let callback: CallbackType?
     var observed = false
 
-    init(_ callback: callbackType? = nil) {
+    init(_ callback: CallbackType? = nil) {
         self.callback = callback
 
         // without [weak self] closure creates referencr cycle
@@ -225,9 +223,9 @@ class SwiftNotificationsTests: XCTestCase {
 
     func testRefCycleMethodObserver() {
         var released = false
-        let block = { (cb: @escaping MObserver.callbackType) in
+        let block = { (cb: @escaping MObserver.CallbackType) in
             // should be destroyed at the end of the block
-            let _ = MObserver<TestNotification>(cb)
+            _ = MObserver<TestNotification>(cb)
         }
 
         block {
@@ -240,9 +238,9 @@ class SwiftNotificationsTests: XCTestCase {
     func testRefCycleClosueObserver() {
         struct Notification: CodableNotification {}
         var released = false
-        let block = { (cb: @escaping CObserver.callbackType) in
+        let block = { (cb: @escaping CObserver.CallbackType) in
             // should be destroyed at the end of the block
-            let _ = CObserver<Notification>(cb)
+            _ = CObserver<Notification>(cb)
         }
 
         block {

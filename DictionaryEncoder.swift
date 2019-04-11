@@ -28,10 +28,10 @@ extension DictionaryByRef {
 
 class DictionaryEncoder: Encoder {
     var codingPath: [CodingKey] = []
-    var userInfo: [CodingUserInfoKey : Any] = [:]
+    var userInfo: [CodingUserInfoKey: Any] = [:]
     var dictionary = DictionaryByRef([:])
 
-    func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key : CodingKey {
+    func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key: CodingKey {
         return KeyedEncodingContainer(DictionaryEncodingContainer(dictionary))
     }
 
@@ -112,11 +112,11 @@ private class DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainerP
         dictionary[key.stringValue] = value
     }
 
-    func encode<T>(_ value: T, forKey key: K) throws where T : Encodable {
+    func encode<T>(_ value: T, forKey key: K) throws where T: Encodable {
         dictionary[key.stringValue] = value
     }
 
-    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: K) -> KeyedEncodingContainer<NestedKey> where NestedKey : CodingKey {
+    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: K) -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
         fatalError("DictionaryEncoder doesn't support nestedContainer(keyedBy:forKey:)")
     }
 

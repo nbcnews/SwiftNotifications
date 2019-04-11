@@ -5,7 +5,6 @@
 
 import Foundation
 
-
 public protocol NotificationProtocol {
     static var name: Notification.Name { get }
     init?(_ n: Notification)
