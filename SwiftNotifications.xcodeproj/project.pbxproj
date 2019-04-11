@@ -13,6 +13,7 @@
 		9291A8552254172B00E460B7 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8522254172B00E460B7 /* DictionaryEncoder.swift */; };
 		9291A85D22541A2600E460B7 /* SwiftNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A85C22541A2600E460B7 /* SwiftNotificationsTests.swift */; };
 		9291A85F22541A2600E460B7 /* SwiftNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924C5C55223AEAEA00F4FAEC /* SwiftNotifications.framework */; };
+		9291A866225FBDBF00E460B7 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		9291A85A22541A2600E460B7 /* SwiftNotificationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftNotificationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9291A85C22541A2600E460B7 /* SwiftNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNotificationsTests.swift; sourceTree = "<group>"; };
 		9291A85E22541A2600E460B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		924C5C4B223AEAEA00F4FAEC = {
 			isa = PBXGroup;
 			children = (
+				9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */,
 				9291A8502254172B00E460B7 /* DictionaryDecoder.swift */,
 				9291A8522254172B00E460B7 /* DictionaryEncoder.swift */,
 				9291A8512254172B00E460B7 /* Observers.swift */,
@@ -199,6 +202,7 @@
 			files = (
 				9291A8552254172B00E460B7 /* DictionaryEncoder.swift in Sources */,
 				9291A8532254172B00E460B7 /* DictionaryDecoder.swift in Sources */,
+				9291A866225FBDBF00E460B7 /* NotificationProtocol.swift in Sources */,
 				9291A8542254172B00E460B7 /* Observers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
