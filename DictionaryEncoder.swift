@@ -27,9 +27,15 @@ extension DictionaryByRef {
 }
 
 class DictionaryEncoder: Encoder {
-    var codingPath: [CodingKey] = []
-    var userInfo: [CodingUserInfoKey: Any] = [:]
     var dictionary = DictionaryByRef([:])
+
+    var codingPath: [CodingKey] {
+        return []
+    }
+
+    var userInfo: [CodingUserInfoKey : Any] {
+        return [:]
+    }
 
     func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key: CodingKey {
         return KeyedEncodingContainer(DictionaryEncodingContainer(dictionary))
