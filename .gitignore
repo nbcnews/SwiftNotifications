@@ -1,0 +1,31 @@
+# Xcode
+build/*
+*.pbxuser
+*.xccheckout
+*.xcuserstate
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+!default.xcworkspace
+xcuserdata
+xcshareddata
+profile
+*.moved-aside
+.DS_Store
+
+# oclint
+mkmf.log
+oclint.html
+compile_commands.json
+
+# Carthage
+Carthage/*
+
+*.bcsymbolmap
+
+node_modules/*
+.vscode/*
