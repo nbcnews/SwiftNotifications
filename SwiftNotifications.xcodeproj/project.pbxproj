@@ -16,6 +16,11 @@
 		9291A866225FBDBF00E460B7 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */; };
 		9291A8682265480300E460B7 /* NotificationsWithData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8672265480300E460B7 /* NotificationsWithData.swift */; };
 		9291A86A226553C600E460B7 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A869226553C600E460B7 /* PerformanceTests.swift */; };
+		9291A878226650A900E460B7 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */; };
+		9291A879226650AC00E460B7 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8502254172B00E460B7 /* DictionaryDecoder.swift */; };
+		9291A87A226650B200E460B7 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8522254172B00E460B7 /* DictionaryEncoder.swift */; };
+		9291A87B226650B500E460B7 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8512254172B00E460B7 /* Observers.swift */; };
+		9291A87C226650BB00E460B7 /* SwiftNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,7 @@
 		9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocol.swift; sourceTree = "<group>"; };
 		9291A8672265480300E460B7 /* NotificationsWithData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsWithData.swift; sourceTree = "<group>"; };
 		9291A869226553C600E460B7 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
+		9291A87022664F8000E460B7 /* SwiftNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9291A85F22541A2600E460B7 /* SwiftNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9291A86D22664F8000E460B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +94,7 @@
 			children = (
 				924C5C55223AEAEA00F4FAEC /* SwiftNotifications.framework */,
 				9291A85A22541A2600E460B7 /* SwiftNotificationsTests.xctest */,
+				9291A87022664F8000E460B7 /* SwiftNotifications.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +118,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				924C5C5A223AEAEA00F4FAEC /* SwiftNotifications.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9291A86B22664F8000E460B7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9291A87C226650BB00E460B7 /* SwiftNotifications.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +168,24 @@
 			productReference = 9291A85A22541A2600E460B7 /* SwiftNotificationsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		9291A86F22664F8000E460B7 /* SwiftNotifications_tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9291A87522664F8000E460B7 /* Build configuration list for PBXNativeTarget "SwiftNotifications_tvOS" */;
+			buildPhases = (
+				9291A86B22664F8000E460B7 /* Headers */,
+				9291A86C22664F8000E460B7 /* Sources */,
+				9291A86D22664F8000E460B7 /* Frameworks */,
+				9291A86E22664F8000E460B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftNotifications_tvOS;
+			productName = SwiftNotifications_tvOS;
+			productReference = 9291A87022664F8000E460B7 /* SwiftNotifications.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,6 +201,9 @@
 						LastSwiftMigration = 1020;
 					};
 					9291A85922541A2600E460B7 = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					9291A86F22664F8000E460B7 = {
 						CreatedOnToolsVersion = 10.2;
 					};
 				};
@@ -180,6 +223,7 @@
 			targets = (
 				924C5C54223AEAEA00F4FAEC /* SwiftNotifications */,
 				9291A85922541A2600E460B7 /* SwiftNotificationsTests */,
+				9291A86F22664F8000E460B7 /* SwiftNotifications_tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -193,6 +237,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9291A85822541A2600E460B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9291A86E22664F8000E460B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,6 +271,17 @@
 				9291A8682265480300E460B7 /* NotificationsWithData.swift in Sources */,
 				9291A85D22541A2600E460B7 /* SwiftNotificationsTests.swift in Sources */,
 				9291A86A226553C600E460B7 /* PerformanceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9291A86C22664F8000E460B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9291A87A226650B200E460B7 /* DictionaryEncoder.swift in Sources */,
+				9291A87B226650B500E460B7 /* Observers.swift in Sources */,
+				9291A879226650AC00E460B7 /* DictionaryDecoder.swift in Sources */,
+				9291A878226650A900E460B7 /* NotificationProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +514,62 @@
 			};
 			name = Release;
 		};
+		9291A87622664F8000E460B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6B3RPZJG5Q;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbcnews.SwiftNotifications;
+				PRODUCT_NAME = SwiftNotifications;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		9291A87722664F8000E460B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6B3RPZJG5Q;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbcnews.SwiftNotifications;
+				PRODUCT_NAME = SwiftNotifications;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -478,6 +596,15 @@
 			buildConfigurations = (
 				9291A86322541A2600E460B7 /* Debug */,
 				9291A86422541A2600E460B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9291A87522664F8000E460B7 /* Build configuration list for PBXNativeTarget "SwiftNotifications_tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9291A87622664F8000E460B7 /* Debug */,
+				9291A87722664F8000E460B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
