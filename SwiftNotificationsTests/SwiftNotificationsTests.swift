@@ -4,7 +4,7 @@
 //
 
 import XCTest
-import SwiftNotifications
+@testable import SwiftNotifications
 
 protocol PostableNotification {
     func post()
@@ -20,95 +20,6 @@ struct EmptyTestNotification: NotificationProtocol, PostableNotification, Equata
 }
 
 struct EmptyCodableNotification: CodableNotification, PostableNotification, Equatable {
-}
-
-struct MyStruct: Codable, Equatable {
-    let sval: String
-    let fval: Float
-}
-
-class MyClass: Codable, Equatable {
-    let ptval: CGPoint
-    let fval: Float
-
-    init() {
-        ptval = CGPoint.zero
-        fval = 3.0
-    }
-
-    static func == (lhs: MyClass, rhs: MyClass) -> Bool {
-        return  lhs.ptval == rhs.ptval &&
-                lhs.fval == rhs.fval
-    }
-}
-
-struct TestNotification: NotificationProtocol, PostableNotification {
-    let sval: String
-    let ival: Int
-    let uval: MyStruct
-    let rval: MyClass
-
-    init?(_ n: Notification) {
-        guard let info = n.userInfo else {
-            return nil
-        }
-
-        guard let sval = info["sval"] as? String,
-              let ival = info["ival"] as? Int,
-              let uval = info["uval"] as? MyStruct,
-              let rval = info["rval"] as? MyClass
-        else {
-            return nil
-        }
-
-        self.sval = sval
-        self.ival = ival
-        self.uval = uval
-        self.rval = rval
-    }
-
-    init(sval: String, ival: Int, uval: MyStruct, rval: MyClass) {
-        self.sval = sval
-        self.ival = ival
-        self.uval = uval
-        self.rval = rval
-    }
-
-    func post() {
-        let info: [String: Any] = [
-            "sval": sval,
-            "ival": ival,
-            "uval": uval,
-            "rval": rval
-        ]
-
-        NotificationCenter.default.post(Notification(name: TestNotification.name, object: nil, userInfo: info))
-    }
-}
-
-extension TestNotification: Equatable {
-    static func == (lhs: TestNotification, rhs: TestNotification) -> Bool {
-        return  lhs.sval == rhs.sval &&
-                lhs.ival == rhs.ival &&
-                lhs.uval == rhs.uval &&
-                lhs.rval == rhs.rval
-    }
-}
-
-struct CodableTestNotification: CodableNotification, PostableNotification {
-    let sval: String
-    let ival: Int
-    let uval: MyStruct
-    let rval: MyClass
-}
-
-extension CodableTestNotification: Equatable {
-    static func == (lhs: CodableTestNotification, rhs: CodableTestNotification) -> Bool {
-        return  lhs.sval == rhs.sval &&
-                lhs.ival == rhs.ival &&
-                lhs.uval == rhs.uval &&
-                lhs.rval == rhs.rval
-    }
 }
 
 class MObserver<T: NotificationProtocol> {
@@ -199,11 +110,11 @@ class SwiftNotificationsTests: XCTestCase {
     }
 
     func testCodable() {
-        emptyObserverTest(CodableTestNotification(sval: "Test", ival: 1, uval: MyStruct(sval: "Foo", fval: 0.1), rval: MyClass()))
+        emptyObserverTest(CodableTestNotification())
     }
 
     func testCodable2() {
-        observerWithArgumentTest(CodableTestNotification(sval: "Test", ival: 1, uval: MyStruct(sval: "Foo", fval: 0.1), rval: MyClass()))
+        observerWithArgumentTest(CodableTestNotification())
     }
 
     func testEmptyCodable() {
@@ -216,7 +127,7 @@ class SwiftNotificationsTests: XCTestCase {
 
     func testMethodObserver() {
         let m = MObserver<TestNotification>()
-        TestNotification(sval: "Test", ival: 1, uval: MyStruct(sval: "Foo", fval: 0.1), rval: MyClass()).post()
+        TestNotification().post()
 
         XCTAssert(m.observed, "method observer not called")
     }
@@ -250,39 +161,4 @@ class SwiftNotificationsTests: XCTestCase {
         // we expect a leak due to circular reference
         XCTAssert(!released, "class must be released")
     }
-
-    // Performnce of sending codable notification
-    func testPerformance2() {
-        measure {
-            for _ in 1...100000 {
-                CodableTestNotification(sval: "Test", ival: 1, uval: MyStruct(sval: "Foo", fval: 0.1), rval: MyClass()).post()
-            }
-        }
-    }
-
-    // Performance of sending hand encoded notification
-    func testPerformance3() {
-        measure {
-            for _ in 1...100000 {
-                TestNotification(sval: "Test", ival: 1, uval: MyStruct(sval: "Foo", fval: 0.1), rval: MyClass()).post()
-            }
-        }
-    }
-
-    func testPerformance4() {
-        measure {
-            for _ in 1...100000 {
-                EmptyCodableNotification().post()
-            }
-        }
-    }
-
-    func testPerformance5() {
-        measure {
-            for _ in 1...100000 {
-                EmptyTestNotification().post()
-            }
-        }
-    }
-
 }

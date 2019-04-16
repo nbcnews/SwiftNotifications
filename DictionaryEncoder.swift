@@ -3,8 +3,6 @@
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
-import Foundation
-
 class MutableReference<T> {
     var pointee: T
 
@@ -13,7 +11,7 @@ class MutableReference<T> {
     }
 }
 
-typealias DictionaryByRef = MutableReference<[String: Any]>
+typealias DictionaryByRef = MutableReference<[AnyHashable: Any]>
 
 extension DictionaryByRef {
     subscript(index: String) -> Any? {
@@ -26,7 +24,7 @@ extension DictionaryByRef {
     }
 }
 
-class DictionaryEncoder: Encoder {
+struct DictionaryEncoder: Encoder {
     var dictionary = DictionaryByRef([:])
 
     var codingPath: [CodingKey] {
@@ -50,7 +48,7 @@ class DictionaryEncoder: Encoder {
     }
 }
 
-private class DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol {
+private struct DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol {
     var codingPath: [CodingKey] = []
 
     var dictionary: DictionaryByRef

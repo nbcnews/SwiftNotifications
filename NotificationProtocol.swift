@@ -3,11 +3,9 @@
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
-import Foundation
-
 public protocol NotificationProtocol {
     static var name: Notification.Name { get }
-    init?(_ n: Notification)
+    init?(_ notification: Notification)
 }
 
 public typealias CodableNotification = Codable & NotificationProtocol
@@ -28,10 +26,10 @@ public extension NotificationProtocol {
 
 public extension NotificationProtocol where Self: Decodable {
     init?(_ n: Notification) {
-        if let userInfo = n.userInfo as NSDictionary? {
+        if let userInfo = n.userInfo {
             try? self.init(from: DictionaryDecoder(userInfo))
         } else {
-            try? self.init(from: DictionaryDecoder([:]))
+            try? self.init(from: EmptyDictionaryDecoder())
         }
     }
 }

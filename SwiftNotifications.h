@@ -1,12 +1,9 @@
 //
 //  SwiftNotifications.h
-//  SwiftNotifications
-//
-//  Created by Denis on 3/14/19.
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for SwiftNotifications.
 FOUNDATION_EXPORT double SwiftNotificationsVersionNumber;
