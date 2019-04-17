@@ -23,6 +23,7 @@ class ObserverTestCase {
     }
 }
 
+// Test case for method observer.
 class MethodObserver<T: NotificationProtocol>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
@@ -37,6 +38,7 @@ class MethodObserver<T: NotificationProtocol>: ObserverTestCase {
     }
 }
 
+// Test case for method without parameters observer 
 class MethodWithoutParametersObserver<T: NotificationProtocol>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
@@ -66,7 +68,26 @@ class LeakyClosureObserver<T: NotificationProtocol>: ObserverTestCase {
     }
 }
 
+// LeakyMethodObserver demonstrates memory leak produced by reference
+// cycle due to passing method reference to wrong observe call
+class LeakyMethodObserver<T: NotificationProtocol>: ObserverTestCase {
+    private let observer = NotificationObserver<T>()
+
+    required init(_ callback: CallbackType? = nil) {
+        super.init(callback)
+
+        // strong reference to self is implicitly created.
+        // observerMethod == observerMethod(self)
+        observer.observe(using: observerMethod)
+    }
+
+    func observerMethod(notification: T) {
+        observed = true
+    }
+}
+
 // Test of #selector based observer. Unrelated to SwiftNotifications.
+// Just wanted to verify that #selector observer doesn't create ref cycle.
 class SelectorObserver: ObserverTestCase {
     required init(_ callback: CallbackType? = nil) {
         super.init(callback)
@@ -109,9 +130,17 @@ class ReferenceCycleTests: XCTestCase {
         XCTAssert(released, "class must be released")
     }
 
-    func testClosueObserver() {
+    func testLeakyClosueObserver() {
         struct Notification: CodableNotification {}
         let released = referenceCycleTest(LeakyClosureObserver<Notification>.self)
+
+        // we expect a leak due to circular reference. Failure is success
+        XCTAssert(!released, "class must not be released")
+    }
+
+    func testLeakyMethodObserver() {
+        struct Notification: CodableNotification {}
+        let released = referenceCycleTest(LeakyMethodObserver<Notification>.self)
 
         // we expect a leak due to circular reference. Failure is success
         XCTAssert(!released, "class must not be released")
