@@ -36,7 +36,7 @@ private struct DictionaryContainer<K: CodingKey>: KeyedDecodingContainerProtocol
         return []
     }
     var allKeys: [K] {
-        return dictionary.keys.compactMap({$0 as? String}).compactMap({ K(stringValue: $0) })
+        return dictionary.keys.compactMap({ $0 as? String }).compactMap({ K(stringValue: $0) })
     }
 
     let dictionary: DictionaryType
@@ -174,37 +174,4 @@ private struct DictionaryContainer<K: CodingKey>: KeyedDecodingContainerProtocol
     }
 
     typealias Key = K
-}
-
-
-struct EmptyDictionaryDecoder: Decoder {
-    var codingPath: [CodingKey] {
-        return []
-    }
-    var userInfo: [CodingUserInfoKey: Any] {
-        return [:]
-    }
-
-    init() {}
-
-    func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key: CodingKey {
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(
-                codingPath: [],
-                debugDescription: "Can not decode from empty dictonary"))
-    }
-
-    func unkeyedContainer() throws -> UnkeyedDecodingContainer {
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(
-                codingPath: [],
-                debugDescription: "Can not decode from empty dictonary"))
-    }
-
-    func singleValueContainer() throws -> SingleValueDecodingContainer {
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(
-                codingPath: [],
-                debugDescription: "Can not decode from empty dictonary"))
-    }
 }

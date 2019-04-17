@@ -31,7 +31,7 @@ struct DictionaryEncoder: Encoder {
         return []
     }
 
-    var userInfo: [CodingUserInfoKey : Any] {
+    var userInfo: [CodingUserInfoKey: Any] {
         return [:]
     }
 
