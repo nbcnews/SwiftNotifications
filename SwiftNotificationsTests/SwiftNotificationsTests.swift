@@ -22,48 +22,6 @@ struct EmptyTestNotification: NotificationProtocol, PostableNotification, Equata
 struct EmptyCodableNotification: CodableNotification, PostableNotification, Equatable {
 }
 
-class MObserver<T: NotificationProtocol> {
-    typealias CallbackType = () -> Void
-    private let observer = NotificationObserver<T>()
-    private let callback: CallbackType?
-    var observed = false
-
-    init(_ callback: CallbackType? = nil) {
-        self.callback = callback
-
-        observer.observe(self, MObserver.observerMethod)
-    }
-
-    func observerMethod(notification: T) {
-        observed = true
-    }
-
-    deinit {
-        callback?()
-    }
-}
-
-// Leaky observer
-class CObserver<T: NotificationProtocol> {
-    typealias CallbackType = () -> Void
-    private let observer = NotificationObserver<T>()
-    private let callback: CallbackType?
-    var observed = false
-
-    init(_ callback: CallbackType? = nil) {
-        self.callback = callback
-
-        // without [weak self] closure creates referencr cycle
-        observer.observe {
-            self.observed = true
-        }
-    }
-
-    deinit {
-        callback?()
-    }
-}
-
 class SwiftNotificationsTests: XCTestCase {
 
     override func setUp() {
@@ -126,39 +84,9 @@ class SwiftNotificationsTests: XCTestCase {
     }
 
     func testMethodObserver() {
-        let m = MObserver<TestNotification>()
+        let observer = MethodObserver<TestNotification>()
         TestNotification().post()
 
-        XCTAssert(m.observed, "method observer not called")
-    }
-
-    func testRefCycleMethodObserver() {
-        var released = false
-        let block = { (cb: @escaping MObserver.CallbackType) in
-            // should be destroyed at the end of the block
-            _ = MObserver<TestNotification>(cb)
-        }
-
-        block {
-            released = true
-        }
-
-        XCTAssert(released, "class must be released")
-    }
-
-    func testRefCycleClosueObserver() {
-        struct Notification: CodableNotification {}
-        var released = false
-        let block = { (cb: @escaping CObserver.CallbackType) in
-            // should be destroyed at the end of the block
-            _ = CObserver<Notification>(cb)
-        }
-
-        block {
-            released = true
-        }
-
-        // we expect a leak due to circular reference
-        XCTAssert(!released, "class must be released")
+        XCTAssert(observer.observed, "method observer did not get called")
     }
 }
