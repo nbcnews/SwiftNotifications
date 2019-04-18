@@ -66,7 +66,7 @@ struct TestNotification: NotificationProtocol, PostableNotification {
             "rval": rval
         ]
 
-        NotificationCenter.default.post(Notification(name: TestNotification.name, object: nil, userInfo: info))
+        TestNotification.post(info: info)
     }
 }
 

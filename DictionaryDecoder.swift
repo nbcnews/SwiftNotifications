@@ -31,7 +31,7 @@ struct DictionaryDecoder: Decoder {
     }
 }
 
-private struct DictionaryContainer<K: CodingKey>: KeyedDecodingContainerProtocol {
+struct DictionaryContainer<K: CodingKey>: KeyedDecodingContainerProtocol {
     var codingPath: [CodingKey] {
         return []
     }

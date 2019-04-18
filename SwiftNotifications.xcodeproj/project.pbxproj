@@ -26,6 +26,7 @@
 		9291A8822267A8F600E460B7 /* ApplicationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A87F2267A8EE00E460B7 /* ApplicationNotifications.swift */; };
 		9291A8842267CA7E00E460B7 /* EmptyDictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */; };
 		9291A8852267CA7E00E460B7 /* EmptyDictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */; };
+		9291A88722682DF700E460B7 /* DecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A88622682DF700E460B7 /* DecoderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		9291A87D2266869300E460B7 /* ReferenceCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCycleTests.swift; sourceTree = "<group>"; };
 		9291A87F2267A8EE00E460B7 /* ApplicationNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationNotifications.swift; sourceTree = "<group>"; };
 		9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDictionaryDecoder.swift; sourceTree = "<group>"; };
+		9291A88622682DF700E460B7 /* DecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +88,10 @@
 		924C5C4B223AEAEA00F4FAEC = {
 			isa = PBXGroup;
 			children = (
-				9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */,
 				9291A87F2267A8EE00E460B7 /* ApplicationNotifications.swift */,
 				9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */,
 				9291A8502254172B00E460B7 /* DictionaryDecoder.swift */,
+				9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */,
 				9291A8522254172B00E460B7 /* DictionaryEncoder.swift */,
 				9291A8512254172B00E460B7 /* Observers.swift */,
 				924C5C59223AEAEA00F4FAEC /* Info.plist */,
@@ -117,6 +119,7 @@
 				9291A869226553C600E460B7 /* PerformanceTests.swift */,
 				9291A87D2266869300E460B7 /* ReferenceCycleTests.swift */,
 				9291A85E22541A2600E460B7 /* Info.plist */,
+				9291A88622682DF700E460B7 /* DecoderTests.swift */,
 			);
 			path = SwiftNotificationsTests;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				9291A8682265480300E460B7 /* NotificationsWithData.swift in Sources */,
 				9291A85D22541A2600E460B7 /* SwiftNotificationsTests.swift in Sources */,
 				9291A87E2266869300E460B7 /* ReferenceCycleTests.swift in Sources */,
+				9291A88722682DF700E460B7 /* DecoderTests.swift in Sources */,
 				9291A86A226553C600E460B7 /* PerformanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
