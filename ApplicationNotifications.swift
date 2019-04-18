@@ -47,6 +47,23 @@ struct ApplicationSignificantTimeChange: CodableNotification {
     static let name = UIApplication.significantTimeChangeNotification
 }
 
+typealias ApplicationBackgroundRefreshStatusDidChangeObserver = NotificationObserver<ApplicationBackgroundRefreshStatusDidChange>
+struct ApplicationBackgroundRefreshStatusDidChange: CodableNotification {
+    static let name = UIApplication.backgroundRefreshStatusDidChangeNotification
+}
+
+typealias ApplicationProtectedDataWillBecomeUnavailableObserver = NotificationObserver<ApplicationProtectedDataWillBecomeUnavailable>
+struct ApplicationProtectedDataWillBecomeUnavailable: CodableNotification {
+    static let name = UIApplication.protectedDataWillBecomeUnavailableNotification
+}
+
+typealias ApplicationProtectedDataDidBecomeAvailableObserver = NotificationObserver<ApplicationProtectedDataDidBecomeAvailable>
+struct ApplicationProtectedDataDidBecomeAvailable: CodableNotification {
+    static let name = UIApplication.protectedDataDidBecomeAvailableNotification
+}
+
+#if os(iOS)
+
 typealias ApplicationWillChangeStatusBarOrientationObserver = NotificationObserver<ApplicationWillChangeStatusBarOrientation>
 struct ApplicationWillChangeStatusBarOrientation: NotificationProtocol {
     static let name = UIApplication.willChangeStatusBarOrientationNotification
@@ -115,17 +132,4 @@ struct ApplicationDidChangeStatusBarFrame: NotificationProtocol {
     }
 }
 
-typealias ApplicationBackgroundRefreshStatusDidChangeObserver = NotificationObserver<ApplicationBackgroundRefreshStatusDidChange>
-struct ApplicationBackgroundRefreshStatusDidChange: CodableNotification {
-    static let name = UIApplication.backgroundRefreshStatusDidChangeNotification
-}
-
-typealias ApplicationProtectedDataWillBecomeUnavailableObserver = NotificationObserver<ApplicationProtectedDataWillBecomeUnavailable>
-struct ApplicationProtectedDataWillBecomeUnavailable: CodableNotification {
-    static let name = UIApplication.protectedDataWillBecomeUnavailableNotification
-}
-
-typealias ApplicationProtectedDataDidBecomeAvailableObserver = NotificationObserver<ApplicationProtectedDataDidBecomeAvailable>
-struct ApplicationProtectedDataDidBecomeAvailable: CodableNotification {
-    static let name = UIApplication.protectedDataDidBecomeAvailableNotification
-}
+#endif
