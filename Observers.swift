@@ -13,6 +13,7 @@ public class NotificationObserver<T: NotificationProtocol> {
     public init() {
     }
 
+    #if BLOCK_OBSERVERS
     public func observe(main: Bool = false, using block: @escaping (T) -> Void) {
         let queue = main ? OperationQueue.main : nil
         token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { n in
@@ -27,16 +28,17 @@ public class NotificationObserver<T: NotificationProtocol> {
             block()
         }
     }
+    #endif
 
-    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> (T) -> Void, main: Bool = false) {
-        observe(main: main) { [weak object] notification in
-            guard let object = object else { return }
-            method(object)(notification)
+    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> (T) -> Void, queue: OperationQueue? = nil) {
+        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] notification in
+            guard let object = object, let t = T(notification) else { return }
+            method(object)(t)
         }
     }
 
-    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> () -> Void, main: Bool = false) {
-        observe(main: main) { [weak object] in
+    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> () -> Void, queue: OperationQueue? = nil) {
+        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] notification in
             guard let object = object else { return }
             method(object)()
         }
@@ -53,51 +55,42 @@ public class NotificationObserver<T: NotificationProtocol> {
     }
 }
 
-public protocol Observer: class {
-    var tokens: [NSNotification.Name: NSObjectProtocol] { get set }
-}
+public class Observers<U: AnyObject> {
+    private var tokens = [NSNotification.Name: NSObjectProtocol]()
+    private weak var object: U?
+    private let notificationCenter: NotificationCenter
 
-public extension Observer {
-    func observe<T: NotificationProtocol>(main: Bool = false, _ c: @escaping (Self) -> (T) -> Void) {
-        let queue = main ? OperationQueue.main : nil
-        remove(c)
-        let token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak self] n in
-            guard let s = self, let t = T(n) else { return }
-            c(s)(t)
+    init(_ object: U, notificationCenter: NotificationCenter = NotificationCenter.default) {
+        self.object = object
+        self.notificationCenter = notificationCenter
+    }
+
+    @discardableResult
+    func observe<T: NotificationProtocol>(queue: OperationQueue? = nil, _ method: @escaping (U) -> (T) -> Void) -> Self {
+        remove(method)
+
+        let token = notificationCenter.addObserver(forName: T.name, object: nil, queue: queue) { [weak self] notification in
+            guard let object = self?.object, let t = T(notification) else { return }
+            method(object)(t)
         }
 
         tokens[T.name] = token
+        return self
     }
 
-    func observe(_ name: NSNotification.Name, main: Bool = false, _ c: @escaping (Self) -> () -> Void) {
-        let queue = main ? OperationQueue.main : nil
-        remove(name)
-        let token = NotificationCenter.default.addObserver(forName: name, object: nil, queue: queue) { [weak self] _ in
-            guard let s = self else { return }
-            c(s)()
-        }
-
-        tokens[name] = token
-    }
-
-    func remove<T: NotificationProtocol>(_ c: @escaping (Self) -> (T) -> Void) {
+    func remove<T: NotificationProtocol>(_ c: @escaping (U) -> (T) -> Void) {
         guard let token = tokens[T.name] else { return }
-        NotificationCenter.default.removeObserver(token)
+        notificationCenter.removeObserver(token)
     }
 
     func remove(_ name: NSNotification.Name) {
         guard let token = tokens[name] else { return }
-        NotificationCenter.default.removeObserver(token)
+        notificationCenter.removeObserver(token)
     }
-}
 
-open class ObserverBase: Observer {
-    public var tokens = [NSNotification.Name: NSObjectProtocol]()
-
-    public init() {}
     deinit {
         for token in tokens {
-            NotificationCenter.default.removeObserver(token.value)
+            notificationCenter.removeObserver(token.value)
         }
     }
 }

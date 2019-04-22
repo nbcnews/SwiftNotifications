@@ -12,17 +12,7 @@ public typealias CodableNotification = Codable & NotificationProtocol
 
 public extension NotificationProtocol {
     static var name: Notification.Name {
-        return Notification.Name(rawValue: String(describing: self))
-    }
-
-    static func post() {
-        NotificationCenter.default.post(name: Self.name, object: nil, userInfo: nil)
-    }
-
-    static func post(to notificationCenter: NotificationCenter = NotificationCenter.default,
-                     object: AnyObject? = nil,
-                     info: [AnyHashable: Any]? = nil) {
-        notificationCenter.post(name: Self.name, object: object, userInfo: info)
+        return Notification.Name(rawValue: String(reflecting: self))
     }
 }
 
@@ -39,11 +29,11 @@ public extension NotificationProtocol where Self: Decodable {
 public extension NotificationProtocol where Self: Encodable {
     func post() {
         if MemoryLayout<Self>.size == 0 {
-            Self.post()
+            NotificationCenter.default.post(name: Self.name, object: nil, userInfo: nil)
         } else {
             let encoder = DictionaryEncoder()
             try? self.encode(to: encoder)
-            Self.post(info: encoder.dictionary.pointee)
+            NotificationCenter.default.post(name: Self.name, object: nil, userInfo: encoder.dictionary.pointee)
         }
     }
 }

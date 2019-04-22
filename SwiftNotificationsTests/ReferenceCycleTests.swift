@@ -53,6 +53,7 @@ class MethodWithoutParametersObserver<T: NotificationProtocol>: ObserverTestCase
     }
 }
 
+#if BLOCK_OBSERVERS
 // LeakyClosureObserver demonstrates memory leak produced by reference
 // cycle due to `self` capture by closure
 class LeakyClosureObserver<T: NotificationProtocol>: ObserverTestCase {
@@ -83,6 +84,43 @@ class LeakyMethodObserver<T: NotificationProtocol>: ObserverTestCase {
 
     func observerMethod(notification: T) {
         observed = true
+    }
+}
+#endif
+
+// Observing pattern with Observers container
+class MultiObserver: ObserverTestCase {
+    private typealias Me = MultiObserver
+
+    private lazy var observers = Observers(self)
+
+    var observedTest = false
+    var observedEmpty = false
+    var observedCodable = false
+
+    required init(_ callback: CallbackType? = nil) {
+        super.init(callback)
+
+        observers.observe(Me.on(test:))
+            .observe(Me.on(empty:))
+            .observe(Me.on(codable:))
+    }
+
+    private func on(test: TestNotification) {
+        observedTest = true
+    }
+
+    private func on(empty: EmptyTestNotification) {
+        observedEmpty = true
+    }
+
+    private func on(codable: CodableTestNotification) {
+        observedCodable = true
+    }
+
+    deinit {
+        observers.remove(Me.on(test:))
+        observers.remove(TestNotification.name)
     }
 }
 
@@ -130,6 +168,20 @@ class ReferenceCycleTests: XCTestCase {
         XCTAssert(released, "class must be released")
     }
 
+    func testMultiObserver() {
+        let released = referenceCycleTest(MultiObserver.self)
+
+        XCTAssert(released, "class must be released")
+    }
+
+    func testSelectorObserver() {
+        let released = referenceCycleTest(SelectorObserver.self)
+
+        XCTAssert(released, "class must be released")
+    }
+
+    #if BLOCK_OBSERVERS
+    // block observers - they leak
     func testLeakyClosueObserver() {
         struct Notification: CodableNotification {}
         let released = referenceCycleTest(LeakyClosureObserver<Notification>.self)
@@ -145,10 +197,5 @@ class ReferenceCycleTests: XCTestCase {
         // we expect a leak due to circular reference. Failure is success
         XCTAssert(!released, "class must not be released")
     }
-
-    func testSelectorObserver() {
-        let released = referenceCycleTest(SelectorObserver.self)
-
-        XCTAssert(released, "class must be released")
-    }
+    #endif
 }

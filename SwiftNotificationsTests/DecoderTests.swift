@@ -19,11 +19,10 @@ class EmptyDictionaryDecoderTests: XCTestCase {
         }
     }
 
-    // make code covereage happy
     func testGetters() {
         let decoder = EmptyDictionaryDecoder()
-        _ = decoder.codingPath
-        _ = decoder.userInfo
+        XCTAssertEqual(decoder.codingPath.count, 0)
+        XCTAssertEqual(decoder.userInfo.count, 0)
     }
 
     // should throw. Only empty structs/classes supported
@@ -63,11 +62,10 @@ class EmptyDictionaryDecoderTests: XCTestCase {
 
 class DictionaryDecoderTests: XCTestCase {
 
-    // make code covereage happy
     func testGetters() {
         let decoder = DictionaryDecoder([:])
-        _ = decoder.codingPath
-        _ = decoder.userInfo
+        XCTAssertEqual(decoder.codingPath.count, 0)
+        XCTAssertNoThrow(decoder.userInfo)
     }
 
     // should throw. Decoding from arrays not supported
@@ -93,7 +91,7 @@ class DictionaryDecoderTests: XCTestCase {
     // test value supported by decoder
     func testDecoder() {
         struct Struct: Decodable {
-            let string: String
+            let zstring: String
             let bool: Bool
             let int: Int
             let float: Float
@@ -112,7 +110,7 @@ class DictionaryDecoderTests: XCTestCase {
         }
 
         let dictionary: [String: Any] = [
-            "string": "test",
+            "zstring": "test",
             "bool": true,
             "int": 1,
             "float": Float(0.1),
@@ -135,13 +133,90 @@ class DictionaryDecoderTests: XCTestCase {
             XCTFail()
         }
     }
+}
 
-    func testDictionaryContainer() {
-        struct Struct: Decodable {
-            let blah: String
-        }
-        //let d = DictionaryContainer<CodingKey>([:])
-
+class DictionaryContainerTests: XCTestCase {
+    enum Key: CodingKey {
+        case foo
+        case boo
+        case bar
     }
 
+    func testProperties() {
+        let d = DictionaryContainer<Key>(["foo": 1, "bar": 2])
+        XCTAssert(d.allKeys.count == 2)
+        XCTAssert(d.allKeys.contains(.foo))
+        XCTAssert(d.allKeys.contains(.bar))
+        XCTAssert(d.codingPath.count == 0)
+    }
+
+    func testContains() {
+        let d = DictionaryContainer<Key>(["foo": true])
+        XCTAssertTrue(d.contains(.foo))
+        XCTAssertFalse(d.contains(.bar))
+    }
+
+    func testUnimplemented() {
+        let d = DictionaryContainer<Key>([:])
+        XCTAssertNil(try? d.nestedContainer(keyedBy: Key.self, forKey: .foo))
+        XCTAssertNil(try? d.nestedUnkeyedContainer(forKey: .bar))
+        XCTAssertNil(try? d.superDecoder())
+        XCTAssertNil(try? d.superDecoder(forKey: .boo))
+    }
+
+    func testDecodeNil() {
+        let d = DictionaryContainer<Key>(["foo": true])
+        XCTAssertNotEqual(try? d.decodeNil(forKey: .foo), true)
+    }
+
+    func testDecodeBool() {
+        decodeValueTest(val: true)
+    }
+
+    func testDecodeString() {
+        decodeValueTest(val: "FooBar")
+    }
+
+    func testDecodeInt() {
+        decodeValueTest(val: 3)
+    }
+    func testDecodeInt8() {
+        decodeValueTest(val: Int8(3))
+    }
+    func testDecodeInt16() {
+        decodeValueTest(val: Int16(3))
+    }
+    func testDecodeInt32() {
+        decodeValueTest(val: Int32(3))
+    }
+    func testDecodeInt64() {
+        decodeValueTest(val: Int64(3))
+    }
+
+    func testDecodeUInt() {
+        decodeValueTest(val: UInt(3))
+    }
+    func testDecodeUInt8() {
+        decodeValueTest(val: UInt8(3))
+    }
+    func testDecodeUInt16() {
+        decodeValueTest(val: UInt16(3))
+    }
+    func testDecodeUInt32() {
+        decodeValueTest(val: UInt32(3))
+    }
+    func testDecodeUInt64() {
+        decodeValueTest(val: UInt64(3))
+    }
+
+    // helper to test various decode methods
+    func decodeValueTest<T: Decodable & Equatable>(val: T) {
+        let d = DictionaryContainer<Key>(["foo": val])
+        XCTAssert((try? d.decode(T.self, forKey: .foo)) == val)
+        // typeMismatch
+        XCTAssertNil(try? d.decode(Other.self, forKey: .foo))
+        // keyNotFound
+        XCTAssertNil(try? d.decode(T.self, forKey: .bar))
+    }
+    struct Other: Decodable {}
 }

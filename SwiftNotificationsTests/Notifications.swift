@@ -1,9 +1,21 @@
 //
-//  NotificationsWithData.swift
+//  Notifications.swift
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
 import SwiftNotifications
+
+struct EmptyTestNotification: NotificationProtocol, PostableNotification, Equatable {
+    init?(_ n: Notification) {}
+    init() {}
+
+    func post() {
+        NotificationCenter.default.post(name: EmptyTestNotification.name, object: nil)
+    }
+}
+
+struct EmptyCodableNotification: CodableNotification, PostableNotification, Equatable {
+}
 
 struct MockStruct: Codable, Equatable {
     let sval: String
@@ -66,7 +78,7 @@ struct TestNotification: NotificationProtocol, PostableNotification {
             "rval": rval
         ]
 
-        TestNotification.post(info: info)
+        NotificationCenter.default.post(name: TestNotification.name, object: nil, userInfo: info)
     }
 }
 

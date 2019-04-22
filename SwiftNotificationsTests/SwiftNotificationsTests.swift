@@ -10,27 +10,35 @@ protocol PostableNotification {
     func post()
 }
 
-struct EmptyTestNotification: NotificationProtocol, PostableNotification, Equatable {
-    init?(_ n: Notification) {}
-    init() {}
-
-    func post() {
-        EmptyTestNotification.post()
-    }
-}
-
-struct EmptyCodableNotification: CodableNotification, PostableNotification, Equatable {
-}
-
 class SwiftNotificationsTests: XCTestCase {
+    func testMethodObserver() {
+        let observer = MethodObserver<TestNotification>()
+        TestNotification().post()
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        XCTAssert(observer.observed, "method observer did not get called")
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testMethodWithoutParametersObserver() {
+        let observer = MethodWithoutParametersObserver<TestNotification>()
+        TestNotification().post()
+
+        XCTAssert(observer.observed, "method observer did not get called")
     }
+
+    func testMultiObserver() {
+        let multi = MultiObserver()
+        TestNotification().post()
+        EmptyTestNotification().post()
+        CodableTestNotification().post()
+
+        XCTAssert(multi.observedTest)
+        XCTAssert(multi.observedEmpty)
+        XCTAssert(multi.observedCodable)
+    }
+}
+
+#if BLOCK_OBSERVERS
+class BlockObserversTests: XCTestCase {
 
     func emptyObserverTest<T: PostableNotification & NotificationProtocol>(_ t: T) {
         let observer = NotificationObserver<T>()
@@ -82,11 +90,5 @@ class SwiftNotificationsTests: XCTestCase {
     func testEmptyCodable2() {
         observerWithArgumentTest(EmptyCodableNotification())
     }
-
-    func testMethodObserver() {
-        let observer = MethodObserver<TestNotification>()
-        TestNotification().post()
-
-        XCTAssert(observer.observed, "method observer did not get called")
-    }
 }
+#endif
