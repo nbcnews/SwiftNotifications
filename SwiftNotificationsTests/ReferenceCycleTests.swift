@@ -101,7 +101,8 @@ class MultiObserver: ObserverTestCase {
     required init(_ callback: CallbackType? = nil) {
         super.init(callback)
 
-        observers.observe(Me.on(test:))
+        observers
+            .observe(Me.on(test:))
             .observe(Me.on(empty:))
             .observe(Me.on(codable:))
     }

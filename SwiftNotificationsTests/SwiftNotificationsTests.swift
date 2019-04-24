@@ -35,6 +35,20 @@ class SwiftNotificationsTests: XCTestCase {
         XCTAssert(multi.observedEmpty)
         XCTAssert(multi.observedCodable)
     }
+
+    func testReleasingObservers() {
+        class Foo: ObserverTestCase {
+            func on(testNotification: TestNotification) {
+                observed = true
+            }
+        }
+
+        var f: Foo? = Foo()
+        let o = Observers(f!)
+        o.observe(Foo.on(testNotification:))
+        f = nil
+        TestNotification().post()
+    }
 }
 
 #if BLOCK_OBSERVERS
