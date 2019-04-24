@@ -5,16 +5,16 @@
 
 import SwiftNotifications
 
-struct EmptyTestNotification: NotificationProtocol, PostableNotification, Equatable {
+struct EmptyTestNotification: PostableNotification, Equatable {
+    var userInfo: [AnyHashable: Any]? {
+        return nil
+    }
+
     init?(_ n: Notification) {}
     init() {}
-
-    func post() {
-        NotificationCenter.default.post(name: EmptyTestNotification.name, object: nil)
-    }
 }
 
-struct EmptyCodableNotification: CodableNotification, PostableNotification, Equatable {
+struct EmptyCodableNotification: CodableNotification, Equatable {
 }
 
 struct MockStruct: Codable, Equatable {
@@ -45,11 +45,21 @@ class MockClass: Codable, Equatable {
 // TestNotification implements notification with four stored properties,
 // custom implemetation of constructor for NotificationObserver
 // and custom post() implementation
-struct TestNotification: NotificationProtocol, PostableNotification {
+struct TestNotification: PostableNotification {
+
     let sval: String
     let ival: Int
     let uval: MockStruct
     let rval: MockClass
+
+    var userInfo: [AnyHashable: Any]? {
+        return [
+            "sval": sval,
+            "ival": ival,
+            "uval": uval,
+            "rval": rval
+        ]
+    }
 
     init?(_ n: Notification) {
         guard let info = n.userInfo else {
@@ -68,17 +78,6 @@ struct TestNotification: NotificationProtocol, PostableNotification {
         self.ival = ival
         self.uval = uval
         self.rval = rval
-    }
-
-    func post() {
-        let info: [AnyHashable: Any] = [
-            "sval": sval,
-            "ival": ival,
-            "uval": uval,
-            "rval": rval
-        ]
-
-        NotificationCenter.default.post(name: TestNotification.name, object: nil, userInfo: info)
     }
 }
 
@@ -102,7 +101,7 @@ extension TestNotification: Equatable {
 
 // CodableTestNotification provides same functionality as TestNotification above
 // but it does so without any additional code requirements
-struct CodableTestNotification: CodableNotification, PostableNotification {
+struct CodableTestNotification: CodableNotification {
     let sval: String
     let ival: Int
     let uval: MockStruct

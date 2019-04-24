@@ -13,7 +13,7 @@ struct DictionaryDecoder: Decoder {
         return [:]
     }
 
-    let dictionary: DictionaryType
+    private let dictionary: DictionaryType
     init(_ dictionary: DictionaryType) {
         self.dictionary = dictionary
     }

@@ -90,6 +90,7 @@ class LeakyMethodObserver<T: NotificationProtocol>: ObserverTestCase {
 
 // Observing pattern with Observers container
 class MultiObserver: ObserverTestCase {
+    //swiftlint:disable:next type_name
     private typealias Me = MultiObserver
 
     private lazy var observers = Observers(self)

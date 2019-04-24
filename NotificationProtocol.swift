@@ -8,13 +8,25 @@ public protocol NotificationProtocol {
     init?(_ notification: Notification)
 }
 
-public typealias CodableNotification = Codable & NotificationProtocol
-
 public extension NotificationProtocol {
     static var name: Notification.Name {
         return Notification.Name(rawValue: String(reflecting: self))
     }
 }
+
+public protocol PostableNotification: NotificationProtocol {
+    var userInfo: [AnyHashable: Any]? { get }
+    func post(_ notificationCenter: NotificationCenter, object: Any?)
+}
+
+public extension PostableNotification {
+    func post(_ notificationCenter: NotificationCenter = NotificationCenter.default,
+              object: Any? = nil) {
+        notificationCenter.post(name: Self.name, object: object, userInfo: userInfo)
+    }
+}
+
+public typealias CodableNotification = Codable & PostableNotification
 
 public extension NotificationProtocol where Self: Decodable {
     init?(_ notification: Notification) {
@@ -27,13 +39,13 @@ public extension NotificationProtocol where Self: Decodable {
 }
 
 public extension NotificationProtocol where Self: Encodable {
-    func post() {
+    var userInfo: [AnyHashable: Any]? {
         if MemoryLayout<Self>.size == 0 {
-            NotificationCenter.default.post(name: Self.name, object: nil, userInfo: nil)
+            return nil
         } else {
             let encoder = DictionaryEncoder()
             try? self.encode(to: encoder)
-            NotificationCenter.default.post(name: Self.name, object: nil, userInfo: encoder.dictionary.pointee)
+            return encoder.dictionary.pointee
         }
     }
 }

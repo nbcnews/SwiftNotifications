@@ -15,7 +15,7 @@ class EmptyDictionaryDecoderTests: XCTestCase {
         do {
             _ = try EmptyStruct(from: EmptyDictionaryDecoder())
         } catch {
-            XCTFail()
+            XCTFail("failed to decode EmptyStruct")
         }
     }
 
@@ -130,7 +130,7 @@ class DictionaryDecoderTests: XCTestCase {
         do {
             _ = try Struct(from: DictionaryDecoder(dictionary))
         } catch {
-            XCTFail()
+            XCTFail("failed decoding struct")
         }
     }
 }
@@ -147,7 +147,7 @@ class DictionaryContainerTests: XCTestCase {
         XCTAssert(d.allKeys.count == 2)
         XCTAssert(d.allKeys.contains(.foo))
         XCTAssert(d.allKeys.contains(.bar))
-        XCTAssert(d.codingPath.count == 0)
+        XCTAssert(d.codingPath.isEmpty)
     }
 
     func testContains() {

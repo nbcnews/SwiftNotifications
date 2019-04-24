@@ -38,7 +38,7 @@ public class NotificationObserver<T: NotificationProtocol> {
     }
 
     public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> () -> Void, queue: OperationQueue? = nil) {
-        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] notification in
+        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] _ in
             guard let object = object else { return }
             method(object)()
         }

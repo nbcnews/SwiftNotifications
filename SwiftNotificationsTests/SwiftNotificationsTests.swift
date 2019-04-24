@@ -6,10 +6,6 @@
 import XCTest
 @testable import SwiftNotifications
 
-protocol PostableNotification {
-    func post()
-}
-
 class SwiftNotificationsTests: XCTestCase {
     func testMethodObserver() {
         let observer = MethodObserver<TestNotification>()
@@ -44,6 +40,7 @@ class SwiftNotificationsTests: XCTestCase {
         }
 
         var f: Foo? = Foo()
+        // swiftlint:disable:next force_unwrapping
         let o = Observers(f!)
         o.observe(Foo.on(testNotification:))
         f = nil
