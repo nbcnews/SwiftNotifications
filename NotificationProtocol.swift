@@ -42,10 +42,10 @@ public extension NotificationProtocol where Self: Encodable {
     var userInfo: [AnyHashable: Any]? {
         if MemoryLayout<Self>.size == 0 {
             return nil
-        } else {
-            let encoder = DictionaryEncoder()
-            try? self.encode(to: encoder)
-            return encoder.dictionary.pointee
         }
+
+        let encoder = DictionaryEncoder()
+        try? self.encode(to: encoder)
+        return encoder.dictionary.pointee
     }
 }
