@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		924C5C5A223AEAEA00F4FAEC /* SwiftNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		928AAB2D22712E7800C96BD7 /* TestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928AAB2C22712E7800C96BD7 /* TestCases.swift */; };
 		9291A8532254172B00E460B7 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8502254172B00E460B7 /* DictionaryDecoder.swift */; };
 		9291A8542254172B00E460B7 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8512254172B00E460B7 /* Observers.swift */; };
 		9291A8552254172B00E460B7 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8522254172B00E460B7 /* DictionaryEncoder.swift */; };
@@ -43,6 +44,7 @@
 		924C5C55223AEAEA00F4FAEC /* SwiftNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftNotifications.h; sourceTree = "<group>"; };
 		924C5C59223AEAEA00F4FAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		928AAB2C22712E7800C96BD7 /* TestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCases.swift; sourceTree = "<group>"; };
 		9291A8502254172B00E460B7 /* DictionaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
 		9291A8512254172B00E460B7 /* Observers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
 		9291A8522254172B00E460B7 /* DictionaryEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				9291A87D2266869300E460B7 /* ReferenceCycleTests.swift */,
 				9291A85E22541A2600E460B7 /* Info.plist */,
 				9291A88622682DF700E460B7 /* DecoderTests.swift */,
+				928AAB2C22712E7800C96BD7 /* TestCases.swift */,
 			);
 			path = SwiftNotificationsTests;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				9291A87E2266869300E460B7 /* ReferenceCycleTests.swift in Sources */,
 				9291A88722682DF700E460B7 /* DecoderTests.swift in Sources */,
 				9291A86A226553C600E460B7 /* PerformanceTests.swift in Sources */,
+				928AAB2D22712E7800C96BD7 /* TestCases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

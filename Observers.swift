@@ -30,14 +30,22 @@ public class NotificationObserver<T: NotificationProtocol> {
     }
     #endif
 
-    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> (T) -> Void, queue: OperationQueue? = nil) {
-        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] notification in
+    public func observe<U: AnyObject>(
+        notificationCenter: NotificationCenter = NotificationCenter.default,
+        from source: Any? = nil,
+        queue: OperationQueue? = nil,
+        _ object: U, _ method: @escaping (U) -> (T) -> Void) {
+        token = notificationCenter.addObserver(forName: T.name, object: source, queue: queue) { [weak object] notification in
             guard let object = object, let t = T(notification) else { return }
             method(object)(t)
         }
     }
 
-    public func observe<U: AnyObject>(_ object: U, _ method: @escaping (U) -> () -> Void, queue: OperationQueue? = nil) {
+    public func observe<U: AnyObject>(
+        notificationCenter: NotificationCenter = NotificationCenter.default,
+        from source: Any? = nil,
+        queue: OperationQueue? = nil,
+        _ object: U, _ method: @escaping (U) -> () -> Void) {
         token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] _ in
             guard let object = object else { return }
             method(object)()
@@ -66,7 +74,10 @@ public class Observers<U: AnyObject> {
     }
 
     @discardableResult
-    func observe<T: NotificationProtocol>(queue: OperationQueue? = nil, _ method: @escaping (U) -> (T) -> Void) -> Self {
+    func observe<T: NotificationProtocol>(
+        from source: Any? = nil,
+        queue: OperationQueue? = nil,
+        _ method: @escaping (U) -> (T) -> Void) -> Self {
         remove(method)
 
         let token = notificationCenter.addObserver(forName: T.name, object: nil, queue: queue) { [weak self] notification in

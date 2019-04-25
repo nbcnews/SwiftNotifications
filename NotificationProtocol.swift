@@ -16,13 +16,13 @@ public extension NotificationProtocol {
 
 public protocol PostableNotification: NotificationProtocol {
     var userInfo: [AnyHashable: Any]? { get }
-    func post(_ notificationCenter: NotificationCenter, object: Any?)
+    func post(_ notificationCenter: NotificationCenter, from sender: Any?)
 }
 
 public extension PostableNotification {
     func post(_ notificationCenter: NotificationCenter = NotificationCenter.default,
-              object: Any? = nil) {
-        notificationCenter.post(name: Self.name, object: object, userInfo: userInfo)
+              from sender: Any? = nil) {
+        notificationCenter.post(name: Self.name, object: sender, userInfo: userInfo)
     }
 }
 

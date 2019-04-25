@@ -46,6 +46,20 @@ class SwiftNotificationsTests: XCTestCase {
         f = nil
         TestNotification().post()
     }
+
+    func testCustomNotificationCenterObserver() {
+        let observer = CustomNotificationCenterObserver<TestNotification>()
+        TestNotification().post(observer.notificationCenter)
+
+        XCTAssert(observer.observed, "method observer did not get called")
+    }
+
+    func testObjectObserver() {
+        let observer = ObjectObserver<TestNotification>()
+        TestNotification().post(from: observer)
+
+        XCTAssert(observer.observed, "method observer did not get called")
+    }
 }
 
 #if BLOCK_OBSERVERS
