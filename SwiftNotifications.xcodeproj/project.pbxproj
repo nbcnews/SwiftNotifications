@@ -9,15 +9,17 @@
 /* Begin PBXBuildFile section */
 		924C5C5A223AEAEA00F4FAEC /* SwiftNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		928AAB2D22712E7800C96BD7 /* TestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928AAB2C22712E7800C96BD7 /* TestCases.swift */; };
+		928AAB2F2272221800C96BD7 /* AVNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928AAB2E2272221800C96BD7 /* AVNotifications.swift */; };
+		928AAB302272221800C96BD7 /* AVNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928AAB2E2272221800C96BD7 /* AVNotifications.swift */; };
 		9291A8532254172B00E460B7 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8502254172B00E460B7 /* DictionaryDecoder.swift */; };
 		9291A8542254172B00E460B7 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8512254172B00E460B7 /* Observers.swift */; };
 		9291A8552254172B00E460B7 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8522254172B00E460B7 /* DictionaryEncoder.swift */; };
 		9291A85D22541A2600E460B7 /* SwiftNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A85C22541A2600E460B7 /* SwiftNotificationsTests.swift */; };
 		9291A85F22541A2600E460B7 /* SwiftNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924C5C55223AEAEA00F4FAEC /* SwiftNotifications.framework */; };
-		9291A866225FBDBF00E460B7 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */; };
+		9291A866225FBDBF00E460B7 /* NotificationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocols.swift */; };
 		9291A8682265480300E460B7 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8672265480300E460B7 /* Notifications.swift */; };
 		9291A86A226553C600E460B7 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A869226553C600E460B7 /* PerformanceTests.swift */; };
-		9291A878226650A900E460B7 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */; };
+		9291A878226650A900E460B7 /* NotificationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A865225FBDBF00E460B7 /* NotificationProtocols.swift */; };
 		9291A879226650AC00E460B7 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8502254172B00E460B7 /* DictionaryDecoder.swift */; };
 		9291A87A226650B200E460B7 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8522254172B00E460B7 /* DictionaryEncoder.swift */; };
 		9291A87B226650B500E460B7 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291A8512254172B00E460B7 /* Observers.swift */; };
@@ -45,13 +47,14 @@
 		924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftNotifications.h; sourceTree = "<group>"; };
 		924C5C59223AEAEA00F4FAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		928AAB2C22712E7800C96BD7 /* TestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCases.swift; sourceTree = "<group>"; };
+		928AAB2E2272221800C96BD7 /* AVNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVNotifications.swift; sourceTree = "<group>"; };
 		9291A8502254172B00E460B7 /* DictionaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
 		9291A8512254172B00E460B7 /* Observers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
 		9291A8522254172B00E460B7 /* DictionaryEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
 		9291A85A22541A2600E460B7 /* SwiftNotificationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftNotificationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9291A85C22541A2600E460B7 /* SwiftNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNotificationsTests.swift; sourceTree = "<group>"; };
 		9291A85E22541A2600E460B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocol.swift; sourceTree = "<group>"; };
+		9291A865225FBDBF00E460B7 /* NotificationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocols.swift; sourceTree = "<group>"; };
 		9291A8672265480300E460B7 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		9291A869226553C600E460B7 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		9291A87022664F8000E460B7 /* SwiftNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,8 +93,9 @@
 		924C5C4B223AEAEA00F4FAEC = {
 			isa = PBXGroup;
 			children = (
+				928AAB2E2272221800C96BD7 /* AVNotifications.swift */,
 				9291A87F2267A8EE00E460B7 /* ApplicationNotifications.swift */,
-				9291A865225FBDBF00E460B7 /* NotificationProtocol.swift */,
+				9291A865225FBDBF00E460B7 /* NotificationProtocols.swift */,
 				9291A8502254172B00E460B7 /* DictionaryDecoder.swift */,
 				9291A8832267CA7E00E460B7 /* EmptyDictionaryDecoder.swift */,
 				9291A8522254172B00E460B7 /* DictionaryEncoder.swift */,
@@ -274,10 +278,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928AAB2F2272221800C96BD7 /* AVNotifications.swift in Sources */,
 				9291A8842267CA7E00E460B7 /* EmptyDictionaryDecoder.swift in Sources */,
 				9291A8552254172B00E460B7 /* DictionaryEncoder.swift in Sources */,
 				9291A8532254172B00E460B7 /* DictionaryDecoder.swift in Sources */,
-				9291A866225FBDBF00E460B7 /* NotificationProtocol.swift in Sources */,
+				9291A866225FBDBF00E460B7 /* NotificationProtocols.swift in Sources */,
 				9291A8812267A8F500E460B7 /* ApplicationNotifications.swift in Sources */,
 				9291A8542254172B00E460B7 /* Observers.swift in Sources */,
 			);
@@ -300,12 +305,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928AAB302272221800C96BD7 /* AVNotifications.swift in Sources */,
 				9291A8852267CA7E00E460B7 /* EmptyDictionaryDecoder.swift in Sources */,
 				9291A87A226650B200E460B7 /* DictionaryEncoder.swift in Sources */,
 				9291A87B226650B500E460B7 /* Observers.swift in Sources */,
 				9291A879226650AC00E460B7 /* DictionaryDecoder.swift in Sources */,
 				9291A8822267A8F600E460B7 /* ApplicationNotifications.swift in Sources */,
-				9291A878226650A900E460B7 /* NotificationProtocol.swift in Sources */,
+				9291A878226650A900E460B7 /* NotificationProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

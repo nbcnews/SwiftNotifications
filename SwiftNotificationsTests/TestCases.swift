@@ -23,7 +23,7 @@ class ObserverTestCase {
 }
 
 // Test case for method observer.
-class MethodObserver<T: NotificationProtocol>: ObserverTestCase {
+class MethodObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
     required init(_ callback: CallbackType? = nil) {
@@ -38,7 +38,7 @@ class MethodObserver<T: NotificationProtocol>: ObserverTestCase {
 }
 
 // Test case for method without parameters observer
-class MethodWithoutParametersObserver<T: NotificationProtocol>: ObserverTestCase {
+class MethodWithoutParametersObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
     required init(_ callback: CallbackType? = nil) {
@@ -55,7 +55,7 @@ class MethodWithoutParametersObserver<T: NotificationProtocol>: ObserverTestCase
 #if BLOCK_OBSERVERS
 // LeakyClosureObserver demonstrates memory leak produced by reference
 // cycle due to `self` capture by closure
-class LeakyClosureObserver<T: NotificationProtocol>: ObserverTestCase {
+class LeakyClosureObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
     required init(_ callback: CallbackType? = nil) {
@@ -70,7 +70,7 @@ class LeakyClosureObserver<T: NotificationProtocol>: ObserverTestCase {
 
 // LeakyMethodObserver demonstrates memory leak produced by reference
 // cycle due to passing method reference to wrong observe call
-class LeakyMethodObserver<T: NotificationProtocol>: ObserverTestCase {
+class LeakyMethodObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
     required init(_ callback: CallbackType? = nil) {
@@ -126,7 +126,7 @@ class MultiObserver: ObserverTestCase {
 }
 
 // Test case for custom notification center observer.
-class CustomNotificationCenterObserver<T: NotificationProtocol>: ObserverTestCase {
+class CustomNotificationCenterObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
     let notificationCenter = NotificationCenter()
 
@@ -144,7 +144,7 @@ class CustomNotificationCenterObserver<T: NotificationProtocol>: ObserverTestCas
 }
 
 // Test case for custom notification center observer.
-class ObjectObserver<T: NotificationProtocol>: ObserverTestCase {
+class ObjectObserver<T: ObservableNotification>: ObserverTestCase {
     private let observer = NotificationObserver<T>()
 
     required init(_ callback: CallbackType? = nil) {

@@ -65,7 +65,7 @@ class SwiftNotificationsTests: XCTestCase {
 #if BLOCK_OBSERVERS
 class BlockObserversTests: XCTestCase {
 
-    func emptyObserverTest<T: PostableNotification & NotificationProtocol>(_ t: T) {
+    func emptyObserverTest<T: PostableNotification & ObservableNotification>(_ t: T) {
         let observer = NotificationObserver<T>()
         var called = false
         observer.observe {
@@ -77,7 +77,7 @@ class BlockObserversTests: XCTestCase {
         XCTAssert(called, "observer not called")
     }
 
-    func observerWithArgumentTest<T: PostableNotification & NotificationProtocol & Equatable>(_ t: T) {
+    func observerWithArgumentTest<T: PostableNotification & ObservableNotification & Equatable>(_ t: T) {
         let observer = NotificationObserver<T>()
         var called = false
         observer.observe { received in

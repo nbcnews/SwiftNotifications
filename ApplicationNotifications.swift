@@ -65,7 +65,7 @@ struct ApplicationProtectedDataDidBecomeAvailable: CodableNotification {
 #if os(iOS)
 
 typealias ApplicationWillChangeStatusBarOrientationObserver = NotificationObserver<ApplicationWillChangeStatusBarOrientation>
-struct ApplicationWillChangeStatusBarOrientation: NotificationProtocol {
+struct ApplicationWillChangeStatusBarOrientation: ObservableNotification {
     static let name = UIApplication.willChangeStatusBarOrientationNotification
 
     let orientation: UIInterfaceOrientation
@@ -82,7 +82,7 @@ struct ApplicationWillChangeStatusBarOrientation: NotificationProtocol {
 }
 
 typealias ApplicationDidChangeStatusBarOrientationObserver = NotificationObserver<ApplicationDidChangeStatusBarOrientation>
-struct ApplicationDidChangeStatusBarOrientation: NotificationProtocol {
+struct ApplicationDidChangeStatusBarOrientation: ObservableNotification {
     static let name = UIApplication.didChangeStatusBarOrientationNotification
 
     let orientation: UIInterfaceOrientation
@@ -99,7 +99,7 @@ struct ApplicationDidChangeStatusBarOrientation: NotificationProtocol {
 }
 
 typealias ApplicationWillChangeStatusBarFrameObserver = NotificationObserver<ApplicationWillChangeStatusBarFrame>
-struct ApplicationWillChangeStatusBarFrame: NotificationProtocol {
+struct ApplicationWillChangeStatusBarFrame: ObservableNotification {
     static let name = UIApplication.willChangeStatusBarFrameNotification
 
     let frame: CGRect
@@ -116,7 +116,7 @@ struct ApplicationWillChangeStatusBarFrame: NotificationProtocol {
 }
 
 typealias ApplicationDidChangeStatusBarFrameObserver = NotificationObserver<ApplicationDidChangeStatusBarFrame>
-struct ApplicationDidChangeStatusBarFrame: NotificationProtocol {
+struct ApplicationDidChangeStatusBarFrame: ObservableNotification {
     static let name = UIApplication.didChangeStatusBarFrameNotification
 
     let frame: CGRect

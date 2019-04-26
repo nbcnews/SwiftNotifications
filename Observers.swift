@@ -3,7 +3,7 @@
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
-public class NotificationObserver<T: NotificationProtocol> {
+public class NotificationObserver<T: ObservableNotification> {
     private var token: NSObjectProtocol? {
         willSet {
             remove()
@@ -74,7 +74,7 @@ public class Observers<U: AnyObject> {
     }
 
     @discardableResult
-    func observe<T: NotificationProtocol>(
+    func observe<T: ObservableNotification>(
         from source: Any? = nil,
         queue: OperationQueue? = nil,
         _ method: @escaping (U) -> (T) -> Void) -> Self {
@@ -89,7 +89,7 @@ public class Observers<U: AnyObject> {
         return self
     }
 
-    func remove<T: NotificationProtocol>(_ c: @escaping (U) -> (T) -> Void) {
+    func remove<T: ObservableNotification>(_ c: @escaping (U) -> (T) -> Void) {
         guard let token = tokens[T.name] else { return }
         notificationCenter.removeObserver(token)
     }
