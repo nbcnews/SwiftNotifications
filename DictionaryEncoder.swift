@@ -48,7 +48,7 @@ struct DictionaryEncoder: Encoder {
     }
 }
 
-private struct DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol {
+struct DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol {
     var codingPath: [CodingKey] = []
 
     var dictionary: DictionaryByRef
@@ -57,7 +57,6 @@ private struct DictionaryEncodingContainer<K: CodingKey>: KeyedEncodingContainer
     }
 
     func encodeNil(forKey key: K) throws {
-        dictionary[key.stringValue] = nil
     }
 
     func encode(_ value: Bool, forKey key: K) throws {

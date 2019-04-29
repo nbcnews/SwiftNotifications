@@ -90,18 +90,18 @@ public class Observers<U: AnyObject> {
     }
 
     func remove<T: ObservableNotification>(_ c: @escaping (U) -> (T) -> Void) {
-        guard let token = tokens[T.name] else { return }
-        notificationCenter.removeObserver(token)
+        remove(T.name)
     }
 
     func remove(_ name: NSNotification.Name) {
-        guard let token = tokens[name] else { return }
-        notificationCenter.removeObserver(token)
+        if let token = tokens.removeValue(forKey: name) {
+            notificationCenter.removeObserver(token)
+        }
     }
 
     deinit {
-        for token in tokens {
-            notificationCenter.removeObserver(token.value)
+        for token in tokens.values {
+            notificationCenter.removeObserver(token)
         }
     }
 }
