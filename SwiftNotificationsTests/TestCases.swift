@@ -127,15 +127,14 @@ class MultiObserver: ObserverTestCase {
 
 // Test case for custom notification center observer.
 class CustomNotificationCenterObserver<T: ObservableNotification>: ObserverTestCase {
-    private let observer = NotificationObserver<T>()
+    private let observer: NotificationObserver<T>
     let notificationCenter = NotificationCenter()
 
     required init(_ callback: CallbackType? = nil) {
+        observer = NotificationObserver<T>(notificationCenter)
         super.init(callback)
 
-        observer.observe(
-            notificationCenter: notificationCenter,
-            self, CustomNotificationCenterObserver.observerMethod)
+        observer.observe(self, CustomNotificationCenterObserver.observerMethod)
     }
 
     func observerMethod(notification: T) {

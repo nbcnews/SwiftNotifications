@@ -10,13 +10,16 @@ public class NotificationObserver<T: ObservableNotification> {
         }
     }
 
-    public init() {
+    private var notificationCenter: NotificationCenter
+
+    public init(_ notificationCenter: NotificationCenter = NotificationCenter.default) {
+        self.notificationCenter = notificationCenter
     }
 
     #if BLOCK_OBSERVERS
     public func observe(main: Bool = false, using block: @escaping (T) -> Void) {
         let queue = main ? OperationQueue.main : nil
-        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { n in
+        token = notificationCenter.addObserver(forName: T.name, object: nil, queue: queue) { n in
             guard let t = T(n) else { return }
             block(t)
         }
@@ -24,14 +27,13 @@ public class NotificationObserver<T: ObservableNotification> {
 
     public func observe(main: Bool = false, using block: @escaping () -> Void) {
         let queue = main ? OperationQueue.main : nil
-        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { _ in
+        token = notificationCenter.addObserver(forName: T.name, object: nil, queue: queue) { _ in
             block()
         }
     }
     #endif
 
     public func observe<U: AnyObject>(
-        notificationCenter: NotificationCenter = NotificationCenter.default,
         from source: Any? = nil,
         queue: OperationQueue? = nil,
         _ object: U, _ method: @escaping (U) -> (T) -> Void) {
@@ -42,11 +44,10 @@ public class NotificationObserver<T: ObservableNotification> {
     }
 
     public func observe<U: AnyObject>(
-        notificationCenter: NotificationCenter = NotificationCenter.default,
         from source: Any? = nil,
         queue: OperationQueue? = nil,
         _ object: U, _ method: @escaping (U) -> () -> Void) {
-        token = NotificationCenter.default.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] _ in
+        token = notificationCenter.addObserver(forName: T.name, object: nil, queue: queue) { [weak object] _ in
             guard let object = object else { return }
             method(object)()
         }
@@ -54,7 +55,7 @@ public class NotificationObserver<T: ObservableNotification> {
 
     public func remove() {
         if let token = token {
-            NotificationCenter.default.removeObserver(token)
+            notificationCenter.removeObserver(token)
         }
     }
 
