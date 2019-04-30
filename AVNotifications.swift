@@ -35,7 +35,7 @@ struct AudioSessionRouteChange: ObservableNotification {
     init?(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let reason = AVAudioSession.RouteChangeReason(rawValue:reasonValue),
+            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
             let previousRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription
         else {
                 return nil
@@ -58,7 +58,7 @@ struct SilenceSecondaryAudioHint: ObservableNotification {
     static let name = AVAudioSession.silenceSecondaryAudioHintNotification
 
     let hint: AVAudioSession.SilenceSecondaryAudioHintType
-    
+
     init?(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let typeValue = userInfo[AVAudioSessionSilenceSecondaryAudioHintTypeKey] as? UInt,
@@ -67,5 +67,69 @@ struct SilenceSecondaryAudioHint: ObservableNotification {
         }
 
         self.hint = hint
+    }
+}
+
+typealias PlayerItemPlaybackStalledObserver = NotificationObserver<PlayerItemPlaybackStalled>
+struct PlayerItemPlaybackStalled: ObservableNotification {
+    static let name = Notification.Name.AVPlayerItemPlaybackStalled
+
+    let playerItem: AVPlayerItem?
+
+    init(_ n: Notification) {
+        playerItem = n.object as? AVPlayerItem
+    }
+}
+
+typealias PlayerItemFailedToPlayToEndTimeObserver = NotificationObserver<PlayerItemFailedToPlayToEndTime>
+struct PlayerItemFailedToPlayToEndTime: ObservableNotification {
+    static let name = Notification.Name.AVPlayerItemFailedToPlayToEndTime
+
+    let playerItem: AVPlayerItem
+    let error: NSError
+
+    init?(_ n: Notification) {
+        guard let error = n.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError,
+            let item = n.object as? AVPlayerItem else {
+            return nil
+        }
+        playerItem = item
+        self.error = error
+    }
+}
+
+typealias PlayerItemDidPlayToEndTimeObserver = NotificationObserver<PlayerItemDidPlayToEndTime>
+struct PlayerItemDidPlayToEndTime: ObservableNotification {
+    static let name = NSNotification.Name.AVPlayerItemDidPlayToEndTime
+
+    let playerItem: AVPlayerItem
+
+    init?(_ n: Notification) {
+        guard let playerItem = n.object as? AVPlayerItem else { return nil }
+        self.playerItem = playerItem
+    }
+}
+
+typealias PlayerItemNewErrorLogEntryObserver = NotificationObserver<PlayerItemNewErrorLogEntry>
+struct PlayerItemNewErrorLogEntry: ObservableNotification {
+    static let name = NSNotification.Name.AVPlayerItemNewErrorLogEntry
+
+    let playerItem: AVPlayerItem
+
+    init?(_ n: Notification) {
+        guard let playerItem = n.object as? AVPlayerItem else { return nil }
+        self.playerItem = playerItem
+    }
+}
+
+typealias PlayerItemNewAccessLogEntryObserver = NotificationObserver<PlayerItemNewAccessLogEntry>
+struct PlayerItemNewAccessLogEntry: ObservableNotification {
+    static let name = NSNotification.Name.AVPlayerItemNewAccessLogEntry
+
+    let playerItem: AVPlayerItem
+
+    init?(_ n: Notification) {
+        guard let playerItem = n.object as? AVPlayerItem else { return nil }
+        self.playerItem = playerItem
     }
 }

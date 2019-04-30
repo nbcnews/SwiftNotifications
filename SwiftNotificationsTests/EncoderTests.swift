@@ -38,7 +38,7 @@ class DictionaryEncodingContainerTests: XCTestCase {
             XCTFail("encodeNil(forKey:) threw exception")
         }
     }
-    
+
     func testEncodeBool() {
         encodeValueTest(val: true)
     }
@@ -91,6 +91,7 @@ class DictionaryEncodingContainerTests: XCTestCase {
         encodeValueTest(val: MyEncodable())
     }
 
+    // swiftlint:disable cyclomatic_complexity
     // helper to test various encode methods
     func encodeValueTest<T: Encodable & Equatable>(val: T) {
         let ref = DictionaryByRef([:])
@@ -141,4 +142,3 @@ class DictionaryEncodingContainerTests: XCTestCase {
         }
     }
 }
-
