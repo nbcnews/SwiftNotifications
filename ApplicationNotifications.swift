@@ -7,70 +7,70 @@ import UIKit
 
 // swiftlint:disable type_name
 
-typealias ApplicationWillEnterForegroundObserver = NotificationObserver<ApplicationWillEnterForeground>
-struct ApplicationWillEnterForeground: CodableNotification {
-    static let name = UIApplication.willEnterForegroundNotification
+public typealias ApplicationWillEnterForegroundObserver = NotificationObserver<ApplicationWillEnterForeground>
+public struct ApplicationWillEnterForeground: CodableNotification {
+    public static let name = UIApplication.willEnterForegroundNotification
 }
 
-typealias ApplicationDidEnterBackgroundObserver = NotificationObserver<ApplicationDidEnterBackground>
-struct ApplicationDidEnterBackground: CodableNotification {
-    static let name = UIApplication.didEnterBackgroundNotification
+public typealias ApplicationDidEnterBackgroundObserver = NotificationObserver<ApplicationDidEnterBackground>
+public struct ApplicationDidEnterBackground: CodableNotification {
+    public static let name = UIApplication.didEnterBackgroundNotification
 }
 
-typealias ApplicationDidFinishLaunchingObserver = NotificationObserver<ApplicationDidFinishLaunching>
-struct ApplicationDidFinishLaunching: CodableNotification {
-    static let name = UIApplication.didFinishLaunchingNotification
+public typealias ApplicationDidFinishLaunchingObserver = NotificationObserver<ApplicationDidFinishLaunching>
+public struct ApplicationDidFinishLaunching: CodableNotification {
+    public static let name = UIApplication.didFinishLaunchingNotification
 }
 
-typealias ApplicationDidBecomeActiveObserver = NotificationObserver<ApplicationDidBecomeActive>
-struct ApplicationDidBecomeActive: CodableNotification {
-    static let name = UIApplication.didBecomeActiveNotification
+public typealias ApplicationDidBecomeActiveObserver = NotificationObserver<ApplicationDidBecomeActive>
+public struct ApplicationDidBecomeActive: CodableNotification {
+    public static let name = UIApplication.didBecomeActiveNotification
 }
 
-typealias ApplicationWillResignActiveObserver = NotificationObserver<ApplicationWillResignActive>
-struct ApplicationWillResignActive: CodableNotification {
-    static let name = UIApplication.willResignActiveNotification
+public typealias ApplicationWillResignActiveObserver = NotificationObserver<ApplicationWillResignActive>
+public struct ApplicationWillResignActive: CodableNotification {
+    public static let name = UIApplication.willResignActiveNotification
 }
 
-typealias ApplicationDidReceiveMemoryWarningObserver = NotificationObserver<ApplicationDidReceiveMemoryWarning>
-struct ApplicationDidReceiveMemoryWarning: CodableNotification {
-    static let name = UIApplication.didReceiveMemoryWarningNotification
+public typealias ApplicationDidReceiveMemoryWarningObserver = NotificationObserver<ApplicationDidReceiveMemoryWarning>
+public struct ApplicationDidReceiveMemoryWarning: CodableNotification {
+    public static let name = UIApplication.didReceiveMemoryWarningNotification
 }
 
-typealias ApplicationWillTerminateObserver = NotificationObserver<ApplicationWillTerminate>
-struct ApplicationWillTerminate: CodableNotification {
-    static let name = UIApplication.willTerminateNotification
+public typealias ApplicationWillTerminateObserver = NotificationObserver<ApplicationWillTerminate>
+public struct ApplicationWillTerminate: CodableNotification {
+    public static let name = UIApplication.willTerminateNotification
 }
 
-typealias ApplicationSignificantTimeChangeObserver = NotificationObserver<ApplicationSignificantTimeChange>
-struct ApplicationSignificantTimeChange: CodableNotification {
-    static let name = UIApplication.significantTimeChangeNotification
+public typealias ApplicationSignificantTimeChangeObserver = NotificationObserver<ApplicationSignificantTimeChange>
+public struct ApplicationSignificantTimeChange: CodableNotification {
+    public static let name = UIApplication.significantTimeChangeNotification
 }
 
-typealias ApplicationBackgroundRefreshStatusDidChangeObserver = NotificationObserver<ApplicationBackgroundRefreshStatusDidChange>
-struct ApplicationBackgroundRefreshStatusDidChange: CodableNotification {
-    static let name = UIApplication.backgroundRefreshStatusDidChangeNotification
+public typealias ApplicationBackgroundRefreshStatusDidChangeObserver = NotificationObserver<ApplicationBackgroundRefreshStatusDidChange>
+public struct ApplicationBackgroundRefreshStatusDidChange: CodableNotification {
+    public static let name = UIApplication.backgroundRefreshStatusDidChangeNotification
 }
 
-typealias ApplicationProtectedDataWillBecomeUnavailableObserver = NotificationObserver<ApplicationProtectedDataWillBecomeUnavailable>
-struct ApplicationProtectedDataWillBecomeUnavailable: CodableNotification {
-    static let name = UIApplication.protectedDataWillBecomeUnavailableNotification
+public typealias ApplicationProtectedDataWillBecomeUnavailableObserver = NotificationObserver<ApplicationProtectedDataWillBecomeUnavailable>
+public struct ApplicationProtectedDataWillBecomeUnavailable: CodableNotification {
+    public static let name = UIApplication.protectedDataWillBecomeUnavailableNotification
 }
 
-typealias ApplicationProtectedDataDidBecomeAvailableObserver = NotificationObserver<ApplicationProtectedDataDidBecomeAvailable>
-struct ApplicationProtectedDataDidBecomeAvailable: CodableNotification {
-    static let name = UIApplication.protectedDataDidBecomeAvailableNotification
+public typealias ApplicationProtectedDataDidBecomeAvailableObserver = NotificationObserver<ApplicationProtectedDataDidBecomeAvailable>
+public struct ApplicationProtectedDataDidBecomeAvailable: CodableNotification {
+    public static let name = UIApplication.protectedDataDidBecomeAvailableNotification
 }
 
 #if os(iOS)
 
-typealias ApplicationWillChangeStatusBarOrientationObserver = NotificationObserver<ApplicationWillChangeStatusBarOrientation>
-struct ApplicationWillChangeStatusBarOrientation: ObservableNotification {
-    static let name = UIApplication.willChangeStatusBarOrientationNotification
+public typealias ApplicationWillChangeStatusBarOrientationObserver = NotificationObserver<ApplicationWillChangeStatusBarOrientation>
+public struct ApplicationWillChangeStatusBarOrientation: ObservableNotification {
+    public static let name = UIApplication.willChangeStatusBarOrientationNotification
 
-    let orientation: UIInterfaceOrientation
+    public let orientation: UIInterfaceOrientation
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let info = notification.userInfo,
             let orientation = info[UIApplication.statusBarOrientationUserInfoKey] as? UIInterfaceOrientation
         else {
@@ -81,13 +81,13 @@ struct ApplicationWillChangeStatusBarOrientation: ObservableNotification {
     }
 }
 
-typealias ApplicationDidChangeStatusBarOrientationObserver = NotificationObserver<ApplicationDidChangeStatusBarOrientation>
-struct ApplicationDidChangeStatusBarOrientation: ObservableNotification {
-    static let name = UIApplication.didChangeStatusBarOrientationNotification
+public typealias ApplicationDidChangeStatusBarOrientationObserver = NotificationObserver<ApplicationDidChangeStatusBarOrientation>
+public struct ApplicationDidChangeStatusBarOrientation: ObservableNotification {
+    public static let name = UIApplication.didChangeStatusBarOrientationNotification
 
-    let orientation: UIInterfaceOrientation
+    public let orientation: UIInterfaceOrientation
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let info = notification.userInfo,
             let orientation = info[UIApplication.statusBarOrientationUserInfoKey] as? UIInterfaceOrientation
             else {
@@ -98,13 +98,13 @@ struct ApplicationDidChangeStatusBarOrientation: ObservableNotification {
     }
 }
 
-typealias ApplicationWillChangeStatusBarFrameObserver = NotificationObserver<ApplicationWillChangeStatusBarFrame>
-struct ApplicationWillChangeStatusBarFrame: ObservableNotification {
-    static let name = UIApplication.willChangeStatusBarFrameNotification
+public typealias ApplicationWillChangeStatusBarFrameObserver = NotificationObserver<ApplicationWillChangeStatusBarFrame>
+public struct ApplicationWillChangeStatusBarFrame: ObservableNotification {
+    public static let name = UIApplication.willChangeStatusBarFrameNotification
 
-    let frame: CGRect
+    public let frame: CGRect
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let info = notification.userInfo,
             let frame = info[UIApplication.statusBarFrameUserInfoKey] as? CGRect
             else {
@@ -115,13 +115,13 @@ struct ApplicationWillChangeStatusBarFrame: ObservableNotification {
     }
 }
 
-typealias ApplicationDidChangeStatusBarFrameObserver = NotificationObserver<ApplicationDidChangeStatusBarFrame>
-struct ApplicationDidChangeStatusBarFrame: ObservableNotification {
-    static let name = UIApplication.didChangeStatusBarFrameNotification
+public typealias ApplicationDidChangeStatusBarFrameObserver = NotificationObserver<ApplicationDidChangeStatusBarFrame>
+public struct ApplicationDidChangeStatusBarFrame: ObservableNotification {
+    public static let name = UIApplication.didChangeStatusBarFrameNotification
 
-    let frame: CGRect
+    public let frame: CGRect
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let info = notification.userInfo,
             let frame = info[UIApplication.statusBarFrameUserInfoKey] as? CGRect
             else {

@@ -69,13 +69,13 @@ public class Observers<U: AnyObject> {
     private weak var object: U?
     private let notificationCenter: NotificationCenter
 
-    init(_ object: U, notificationCenter: NotificationCenter = NotificationCenter.default) {
+    public init(_ object: U, notificationCenter: NotificationCenter = NotificationCenter.default) {
         self.object = object
         self.notificationCenter = notificationCenter
     }
 
     @discardableResult
-    func observe<T: ObservableNotification>(
+    public func observe<T: ObservableNotification>(
         from source: Any? = nil,
         queue: OperationQueue? = nil,
         _ method: @escaping (U) -> (T) -> Void) -> Self {
@@ -90,11 +90,11 @@ public class Observers<U: AnyObject> {
         return self
     }
 
-    func remove<T: ObservableNotification>(_ c: @escaping (U) -> (T) -> Void) {
+    public func remove<T: ObservableNotification>(_ c: @escaping (U) -> (T) -> Void) {
         remove(T.name)
     }
 
-    func remove(_ name: NSNotification.Name) {
+    public func remove(_ name: NSNotification.Name) {
         if let token = tokens.removeValue(forKey: name) {
             notificationCenter.removeObserver(token)
         }

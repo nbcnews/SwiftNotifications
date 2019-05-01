@@ -5,14 +5,14 @@
 
 import AVFoundation
 
-typealias AudioSessionInterruptionObserver = NotificationObserver<AudioSessionInterruption>
-struct AudioSessionInterruption: ObservableNotification {
-    static let name = AVAudioSession.interruptionNotification
+public typealias AudioSessionInterruptionObserver = NotificationObserver<AudioSessionInterruption>
+public struct AudioSessionInterruption: ObservableNotification {
+    public static let name = AVAudioSession.interruptionNotification
 
-    let interruptionType: AVAudioSession.InterruptionType
-    let interruptionOptions: AVAudioSession.InterruptionOptions
+    public let interruptionType: AVAudioSession.InterruptionType
+    public let interruptionOptions: AVAudioSession.InterruptionOptions
 
-    init?(_ n: Notification) {
+    public init?(_ n: Notification) {
         guard let userInfo = n.userInfo,
             let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
             let interruptionType = AVAudioSession.InterruptionType(rawValue: typeInt)
@@ -26,13 +26,13 @@ struct AudioSessionInterruption: ObservableNotification {
     }
 }
 
-struct AudioSessionRouteChange: ObservableNotification {
-    static let name = AVAudioSession.routeChangeNotification
+public struct AudioSessionRouteChange: ObservableNotification {
+    public static let name = AVAudioSession.routeChangeNotification
 
-    let reason: AVAudioSession.RouteChangeReason
-    let previousRoute: AVAudioSessionRouteDescription
+    public let reason: AVAudioSession.RouteChangeReason
+    public let previousRoute: AVAudioSessionRouteDescription
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
             let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
@@ -46,20 +46,20 @@ struct AudioSessionRouteChange: ObservableNotification {
     }
 }
 
-struct MediaServicesWereLost: DecodableNotification {
-    static let name = AVAudioSession.mediaServicesWereLostNotification
+public struct MediaServicesWereLost: DecodableNotification {
+    public static let name = AVAudioSession.mediaServicesWereLostNotification
 }
 
-struct MediaServicesWereReset: DecodableNotification {
-    static let name = AVAudioSession.mediaServicesWereResetNotification
+public struct MediaServicesWereReset: DecodableNotification {
+    public static let name = AVAudioSession.mediaServicesWereResetNotification
 }
 
-struct SilenceSecondaryAudioHint: ObservableNotification {
-    static let name = AVAudioSession.silenceSecondaryAudioHintNotification
+public struct SilenceSecondaryAudioHint: ObservableNotification {
+    public static let name = AVAudioSession.silenceSecondaryAudioHintNotification
 
-    let hint: AVAudioSession.SilenceSecondaryAudioHintType
+    public let hint: AVAudioSession.SilenceSecondaryAudioHintType
 
-    init?(_ notification: Notification) {
+    public init?(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let typeValue = userInfo[AVAudioSessionSilenceSecondaryAudioHintTypeKey] as? UInt,
             let hint = AVAudioSession.SilenceSecondaryAudioHintType(rawValue: typeValue) else {
@@ -70,25 +70,25 @@ struct SilenceSecondaryAudioHint: ObservableNotification {
     }
 }
 
-typealias PlayerItemPlaybackStalledObserver = NotificationObserver<PlayerItemPlaybackStalled>
-struct PlayerItemPlaybackStalled: ObservableNotification {
-    static let name = Notification.Name.AVPlayerItemPlaybackStalled
+public typealias PlayerItemPlaybackStalledObserver = NotificationObserver<PlayerItemPlaybackStalled>
+public struct PlayerItemPlaybackStalled: ObservableNotification {
+    public static let name = Notification.Name.AVPlayerItemPlaybackStalled
 
-    let playerItem: AVPlayerItem?
+    public let playerItem: AVPlayerItem?
 
-    init(_ n: Notification) {
+    public init(_ n: Notification) {
         playerItem = n.object as? AVPlayerItem
     }
 }
 
-typealias PlayerItemFailedToPlayToEndTimeObserver = NotificationObserver<PlayerItemFailedToPlayToEndTime>
-struct PlayerItemFailedToPlayToEndTime: ObservableNotification {
-    static let name = Notification.Name.AVPlayerItemFailedToPlayToEndTime
+public typealias PlayerItemFailedToPlayToEndTimeObserver = NotificationObserver<PlayerItemFailedToPlayToEndTime>
+public struct PlayerItemFailedToPlayToEndTime: ObservableNotification {
+    public static let name = Notification.Name.AVPlayerItemFailedToPlayToEndTime
 
-    let playerItem: AVPlayerItem
-    let error: NSError
+    public let playerItem: AVPlayerItem
+    public let error: NSError
 
-    init?(_ n: Notification) {
+    public init?(_ n: Notification) {
         guard let error = n.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError,
             let item = n.object as? AVPlayerItem else {
             return nil
@@ -98,37 +98,37 @@ struct PlayerItemFailedToPlayToEndTime: ObservableNotification {
     }
 }
 
-typealias PlayerItemDidPlayToEndTimeObserver = NotificationObserver<PlayerItemDidPlayToEndTime>
-struct PlayerItemDidPlayToEndTime: ObservableNotification {
-    static let name = NSNotification.Name.AVPlayerItemDidPlayToEndTime
+public typealias PlayerItemDidPlayToEndTimeObserver = NotificationObserver<PlayerItemDidPlayToEndTime>
+public struct PlayerItemDidPlayToEndTime: ObservableNotification {
+    public static let name = NSNotification.Name.AVPlayerItemDidPlayToEndTime
 
-    let playerItem: AVPlayerItem
+    public let playerItem: AVPlayerItem
 
-    init?(_ n: Notification) {
+    public init?(_ n: Notification) {
         guard let playerItem = n.object as? AVPlayerItem else { return nil }
         self.playerItem = playerItem
     }
 }
 
-typealias PlayerItemNewErrorLogEntryObserver = NotificationObserver<PlayerItemNewErrorLogEntry>
-struct PlayerItemNewErrorLogEntry: ObservableNotification {
-    static let name = NSNotification.Name.AVPlayerItemNewErrorLogEntry
+public typealias PlayerItemNewErrorLogEntryObserver = NotificationObserver<PlayerItemNewErrorLogEntry>
+public struct PlayerItemNewErrorLogEntry: ObservableNotification {
+    public static let name = NSNotification.Name.AVPlayerItemNewErrorLogEntry
 
-    let playerItem: AVPlayerItem
+    public let playerItem: AVPlayerItem
 
-    init?(_ n: Notification) {
+    public init?(_ n: Notification) {
         guard let playerItem = n.object as? AVPlayerItem else { return nil }
         self.playerItem = playerItem
     }
 }
 
-typealias PlayerItemNewAccessLogEntryObserver = NotificationObserver<PlayerItemNewAccessLogEntry>
-struct PlayerItemNewAccessLogEntry: ObservableNotification {
-    static let name = NSNotification.Name.AVPlayerItemNewAccessLogEntry
+public typealias PlayerItemNewAccessLogEntryObserver = NotificationObserver<PlayerItemNewAccessLogEntry>
+public struct PlayerItemNewAccessLogEntry: ObservableNotification {
+    public static let name = NSNotification.Name.AVPlayerItemNewAccessLogEntry
 
-    let playerItem: AVPlayerItem
+    public let playerItem: AVPlayerItem
 
-    init?(_ n: Notification) {
+    public init?(_ n: Notification) {
         guard let playerItem = n.object as? AVPlayerItem else { return nil }
         self.playerItem = playerItem
     }
