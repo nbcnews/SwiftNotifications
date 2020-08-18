@@ -3,6 +3,8 @@
 //  Copyright © 2018 NBC News Digital. All rights reserved.
 //
 
+import Foundation
+
 typealias DictionaryType = [AnyHashable: Any]
 
 struct DictionaryDecoder: Decoder {

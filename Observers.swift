@@ -3,6 +3,8 @@
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
 
+import Foundation
+
 public class NotificationObserver<T: ObservableNotification> {
     private var token: NSObjectProtocol? {
         willSet {

@@ -44,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		922F7CDB24AE736400B0B622 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		924C5C55223AEAEA00F4FAEC /* SwiftNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924C5C58223AEAEA00F4FAEC /* SwiftNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftNotifications.h; sourceTree = "<group>"; };
 		924C5C59223AEAEA00F4FAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		924C5C4B223AEAEA00F4FAEC = {
 			isa = PBXGroup;
 			children = (
+				922F7CDB24AE736400B0B622 /* Package.swift */,
 				928AAB2E2272221800C96BD7 /* AVNotifications.swift */,
 				9291A87F2267A8EE00E460B7 /* ApplicationNotifications.swift */,
 				9291A865225FBDBF00E460B7 /* NotificationProtocols.swift */,
@@ -334,6 +336,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -398,6 +401,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

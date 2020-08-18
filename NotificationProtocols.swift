@@ -2,6 +2,7 @@
 //  NotificationProtocols.swift
 //  Copyright © 2019 NBC News Digital. All rights reserved.
 //
+import Foundation
 
 public protocol ObservableNotification {
     static var name: Notification.Name { get }
